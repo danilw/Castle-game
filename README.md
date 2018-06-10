@@ -1,7 +1,7 @@
 # Castle-game
 **what is it** this is small game(demo) using wasm and glsl and box2d
 
-**play** [live](https://danilw.github.io/GLSL-howto/goglsl/link)
+**play** [live](https://danilw.github.io/Castle-game/ccgame.html)
 
 ### Building
 
@@ -16,4 +16,4 @@ em++ -DNANOVG_GLES3_IMPLEMENTATION -DGLFW_INCLUDE_ES3 -DGLFW_INCLUDE_GLEXT -DNAN
 ```
 
 ### Screenshot
-![link](https://danilw.github.io/GLSL-howto/goglsl/link)
+![link](https://danilw.github.io/Castle-game/ccg.png)
