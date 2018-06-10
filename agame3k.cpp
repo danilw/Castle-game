@@ -340,7 +340,6 @@ public:
 
     scoreboard_v_table(nanogui::Widget *scr) {
         using namespace nanogui;
-        lfp();
         scbwindow = new Window(scr, "Scoreboard", false);
         scbwindow->setFixedSize(Vector2i(640, 510));
         scbwindow->setLayout(new BoxLayout(Orientation::Vertical, Alignment::Middle, 0, 10));
@@ -420,13 +419,20 @@ public:
         });
         pg = new Label(scbwindow, "Page: /", "sans-bold");
         pg->setFixedSize(Vector2i(600, 20));
-        refresh();
         scbwindow->center();
         scbwindow->setVisible(false);
 
 
 
     }
+    
+    void lfpx(){
+		lfp();
+	}
+	
+	void refreshx(){
+		refresh();
+	}
 
 private:
 
@@ -1318,6 +1324,8 @@ public:
         new Label(window1, "Use mouse :)", "sans-bold");
         b3 = new Button(window1, "Leaderboard");
         b3->setCallback([&] {
+			stable->lfpx();
+			stable->refreshx();
 
             window1->setVisible(false);
             stable->scbwindow->center();
