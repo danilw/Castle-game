@@ -77,33 +77,33 @@
                 preRun: [],
                 postRun: [],
                 /*print: (function () {
-                    var element = document.getElementById('output');
-                    if (element)
-                        element.value = ''; // clear browser cache
-                    return function (text) {
-                        if (arguments.length > 1)
-                            text = Array.prototype.slice.call(arguments).join(' ');
-                        // These replacements are necessary if you render to raw HTML
-                        //text = text.replace(/&/g, "&amp;");
-                        //text = text.replace(/</g, "&lt;");
-                        //text = text.replace(/>/g, "&gt;");
-                        //text = text.replace('\n', '<br>', 'g');
-                        console.log(text);
-                        if (element) {
-                            element.value += text + "\n";
-                            element.scrollTop = element.scrollHeight; // focus on bottom
-                        }
-                    };
-                })(),
-                printErr: function (text) {
-                    if (arguments.length > 1)
-                        text = Array.prototype.slice.call(arguments).join(' ');
-                    if (0) { // XXX disabled for safety typeof dump == 'function') {
-                        dump(text + '\n'); // fast, straight to the real console
-                    } else {
-                        console.error(text);
-                    }
-                },*/
+                 var element = document.getElementById('output');
+                 if (element)
+                 element.value = ''; // clear browser cache
+                 return function (text) {
+                 if (arguments.length > 1)
+                 text = Array.prototype.slice.call(arguments).join(' ');
+                 // These replacements are necessary if you render to raw HTML
+                 //text = text.replace(/&/g, "&amp;");
+                 //text = text.replace(/</g, "&lt;");
+                 //text = text.replace(/>/g, "&gt;");
+                 //text = text.replace('\n', '<br>', 'g');
+                 console.log(text);
+                 if (element) {
+                 element.value += text + "\n";
+                 element.scrollTop = element.scrollHeight; // focus on bottom
+                 }
+                 };
+                 })(),
+                 printErr: function (text) {
+                 if (arguments.length > 1)
+                 text = Array.prototype.slice.call(arguments).join(' ');
+                 if (0) { // XXX disabled for safety typeof dump == 'function') {
+                 dump(text + '\n'); // fast, straight to the real console
+                 } else {
+                 console.error(text);
+                 }
+                 },*/
                 canvas: (function () {
                     var canvas = document.getElementById('canvas');
 
@@ -330,27 +330,61 @@
              }*/
 
             //dodge "Cross-Origin Resource Sharing" v3
+
+            /*function submitBoard(k1, k2, v1, v2, mn, v3) {
+             if (!isonline()) {
+             var http = new XMLHttpRequest();
+             /*http.onerror = function (e) {
+             //no way to check error :(
+             };*/
+            /*       http.open("POST", "http://ccg.nsupdate.info:9000/add", true);
+             http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+             var params = "add=1&key1=" + k1 + "&key2=" + k2 + "&val1=" + v1 + "&val2=" + v2 + "&mn=" + mn + "&c=" + v3;
+             http.send(params);
+             addf(v1, v2, v3);
+             }
+             }*/
+
+
+            //dodge "Cross-Origin Resource Sharing" v4
+
+            var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
+            function doCORSRequest(options, printResult) {
+                var x = new XMLHttpRequest();
+                x.open(options.method, cors_api_url + options.url);
+                x.onload = x.onerror = function () {
+                    printResult(
+                            options.method + ' ' + options.url + '\n' +
+                            x.status + ' ' + x.statusText + '\n\n' +
+                            (x.responseText || '')
+                            );
+                };
+                if (/^POST/i.test(options.method)) {
+                    x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                }
+                x.send(options.data);
+            }
+
             function submitBoard(k1, k2, v1, v2, mn, v3) {
-                /*alert(k1);
-                alert(k2);
-                alert(v1);
-                alert(v2);
-                alert(mn);
-                alert(v3);*/
-                if (!isonline()) {
+                /*if (!isonline()) {
                     var http = new XMLHttpRequest();
-                    /*http.onerror = function (e) {
-                     //no way to check error :(
-                     };*/
                     http.open("POST", "http://ccg.nsupdate.info:9000/add", true);
                     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     var params = "add=1&key1=" + k1 + "&key2=" + k2 + "&val1=" + v1 + "&val2=" + v2 + "&mn=" + mn + "&c=" + v3;
                     http.send(params);
                     addf(v1, v2, v3);
-                }
+                }*/
+                var params = "add=1&key1=" + k1 + "&key2=" + k2 + "&val1=" + v1 + "&val2=" + v2 + "&mn=" + mn + "&c=" + v3;
+                doCORSRequest({
+                    method: 'POST', // 'POST' : 'GET'
+                    url: "http://ccg.nsupdate.info:9000/add",
+                    data: params
+                }, function printResult(result) {
+                    addf(v1, v2, v3);
+                });
             }
 
         </script>
-        <script type="text/javascript" src="http://ccg.nsupdate.info:9000/scoreboard.js"></script>
+        <script type="text/javascript" src="https://cors.io/?http://ccg.nsupdate.info:9000/scoreboard.js"></script>
     </body>
 </html>
