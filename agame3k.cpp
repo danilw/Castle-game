@@ -393,6 +393,8 @@ public:
             auto dlg = new MessageDialog(scbwindow->parent(), MessageDialog::Type::Warning, "Final Score", resm, "Yes", "No", true);
             dlg->setCallback([&](int result) {
                 if (result == 0) {
+					lfp();
+					refresh();
                     if (c_pages > 1) {
                         string namex(c_name);
                         string resm2 =std::to_string((int)pfme); //same lost "scorex" if use here
