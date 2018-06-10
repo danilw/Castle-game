@@ -18,4 +18,6 @@ em++ -DNANOVG_GLES3_IMPLEMENTATION -DGLFW_INCLUDE_ES3 -DGLFW_INCLUDE_GLEXT -DNAN
 ```
 
 ### Screenshot
-![link](https://danilw.github.io/Castle-game/ccg.png)
+![ccg](https://danilw.github.io/Castle-game/ccg.png)
+### Video
+[![ccgv](https://danilw.github.io/Castle-game/yt.png)](https://youtu.be/lNXTFvTDOAo)
