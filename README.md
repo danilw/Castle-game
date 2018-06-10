@@ -3,6 +3,8 @@
 
 **play** [live](https://danilw.github.io/Castle-game/ccgame.html)
 
+original GLSL source in *glsl* folder (soon)
+
 ### Building
 
 1. clone this [nanogui wasm](https://github.com/danilw/nanogui-GLES-wasm)
