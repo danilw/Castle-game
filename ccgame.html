@@ -342,7 +342,7 @@
                     /*http.onerror = function (e) {
                      //no way to check error :(
                      };*/
-                    http.open("POST", "http://ccg.nsupdate.info:9000/add", true);
+                    http.open("POST", "https://cors.io/?http://ccg.nsupdate.info:9000/add", true);
                     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     var params = "add=1&key1=" + k1 + "&key2=" + k2 + "&val1=" + v1 + "&val2=" + v2 + "&mn=" + mn + "&c=" + v3;
                     http.send(params);
@@ -351,6 +351,6 @@
             }
 
         </script>
-        <script type="text/javascript" src="http://ccg.nsupdate.info:9000/scoreboard.js"></script>
+        <script type="text/javascript" src="https://cors.io/?http://ccg.nsupdate.info:9000/scoreboard.js"></script>
     </body>
 </html>
