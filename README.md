@@ -5,7 +5,7 @@
 
 original GLSL source in *glsl* folder
 
-**binary builds** added *bin/exe* builds for Linux and Windows to *bin* folder
+**binary builds** added *bin/exe* builds for Linux(using gcc and llvm) and Windows to *bin* folder
 
 ### Building
 
