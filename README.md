@@ -5,7 +5,7 @@
 
 original GLSL source in *glsl* folder
 
-**binary builds** added *binary* builds for [Linux(gcc)](https://danilw.github.io/Castle-game/bin/gcc.zip), [linux(clang)](https://danilw.github.io/Castle-game/bin/llvm.zip), [Windows(VS2017)](https://danilw.github.io/Castle-game/bin/VS2017.zip)
+**binary builds** added *binary* builds for [Linux(gcc)](https://danilw.github.io/Castle-game/bin/gcc.zip), [Linux(clang)](https://danilw.github.io/Castle-game/bin/llvm.zip), [Windows(VS2017)](https://danilw.github.io/Castle-game/bin/VS2017.zip)
 
 ### Building
 
