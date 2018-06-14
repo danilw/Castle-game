@@ -5,7 +5,7 @@
 
 original GLSL source in *glsl* folder
 
-**binary builds** added *bin/exe* builds for Linux(using gcc and llvm) and Windows to *bin* folder
+**binary builds** added *binary* builds for Linux(using gcc and llvm) and Windows to *bin* folder (VS2017.zip has windows exe file, other are linux binary)
 
 ### Building
 
