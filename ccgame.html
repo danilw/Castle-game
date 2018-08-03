@@ -351,7 +351,7 @@
 
 		function submitBoard(k1, k2, v1, v2, mn, v3) {
 			 if (!isonline()) {
-					var reqp="https://ccg.nsupdate.info/cgame.key?add=1&key1=" + k1 + "&key2=" + k2 + "&val1=" + v1 + "&val2=" + v2 + "&mn=" + mn + "&c=" + v3;
+					var reqp="https://ccg.nsupdate.info/cgame.key?add=1&key1=" + k1 + "&key2=" + k2 + "&val1=" + v1 + "&val2=" + v2 + "&mn=" + mn + "&c=" + v3.replace("#","");
                     var http = new XMLHttpRequest();
                     http.open("GET", reqp, true);
                     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
