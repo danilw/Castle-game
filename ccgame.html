@@ -289,9 +289,38 @@
 
         <script>
             function isonline() {
-                return typeof scoreboardx === 'undefined';
+                return typeof scoreboardxyzw0 === 'undefined';
             }
+            
+            var scoreboardx=[];
+            var scoreboardy=[];
+            var scoreboardz=[];
+            var scoreboardw=[];
+            var issloaded=false;
+            
+            function looseJsonParse(obj){
+				return Function('"use strict";return (' + obj + ')')();
+			}
+			
+            function loadscoreboardxyzw0(){
+				if(!isonline()){
+				if(!issloaded){
+					for(int i=0;i<10000;i++>){
+						if(looseJsonParse("scoreboardxyzw"+i) === 'undefined'){
+							return;
+						}
+						scoreboardx[i]=looseJsonParse("scoreboardxyzw"+i)[0];
+						scoreboardy[i]=looseJsonParse("scoreboardxyzw"+i)[1];
+						scoreboardz[i]=looseJsonParse("scoreboardxyzw"+i)[2];
+						scoreboardw[i]=looseJsonParse("scoreboardxyzw"+i)[3];
+					}
+				}
+				issloaded=true;
+				}
+			}
+            
             function printlist(stid) {
+				loadscoreboardxyzw0();
                 var c_boardlist = Module.cwrap('c_boardlist', 'number', ['string', 'string', 'string', 'number', 'number', 'number']);
                 var c_boardlistlength = Module.cwrap('c_boardlistlength', 'number', ['number']);
                 if (!isonline()) {
@@ -317,75 +346,19 @@
                 scoreboardw[scoreboardw.length] = v3;
             }
 
-            //dodge "Cross-Origin Resource Sharing" v1
-            /*function submitBoard2() {
-             document.body.innerHTML += '<form id="scbForm" action="http://ccg.nsupdate.info:9000/post" method="post"><input type="hidden" name="q" value="a"><input type="submit"></form>';
-             document.getElementById("scbForm").submit();
-             }*/
 
-            //dodge "Cross-Origin Resource Sharing" v2
-            /*function openInNewTab() {
-             var win = window.open("http://ccg.nsupdate.info:9000/post?xxx=yyy", '_blank');
-             win.focus();
-             }*/
-
-            //dodge "Cross-Origin Resource Sharing" v3
-
-            /*function submitBoard(k1, k2, v1, v2, mn, v3) {
-             if (!isonline()) {
-             var http = new XMLHttpRequest();
-             /*http.onerror = function (e) {
-             //no way to check error :(
-             };*/
-            /*       http.open("POST", "http://ccg.nsupdate.info:9000/add", true);
-             http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-             var params = "add=1&key1=" + k1 + "&key2=" + k2 + "&val1=" + v1 + "&val2=" + v2 + "&mn=" + mn + "&c=" + v3;
-             http.send(params);
-             addf(v1, v2, v3);
-             }
-             }*/
-
-
-            //dodge "Cross-Origin Resource Sharing" v4
-
-            var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
-            function doCORSRequest(options, printResult) {
-                var x = new XMLHttpRequest();
-                x.open(options.method, cors_api_url + options.url);
-                x.onload = x.onerror = function () {
-                    printResult(
-                            options.method + ' ' + options.url + '\n' +
-                            x.status + ' ' + x.statusText + '\n\n' +
-                            (x.responseText || '')
-                            );
-                };
-                if (/^POST/i.test(options.method)) {
-                    x.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                }
-                x.send(options.data);
-            }
-
-            function submitBoard(k1, k2, v1, v2, mn, v3) {
-                /*if (!isonline()) {
+		function submitBoard(k1, k2, v1, v2, mn, v3) {
+			 if (!isonline()) {
+					var reqp="https://ccg.nsupdate.info/cgame.key?add=1&key1=" + k1 + "&key2=" + k2 + "&val1=" + v1 + "&val2=" + v2 + "&mn=" + mn + "&c=" + v3;
                     var http = new XMLHttpRequest();
-                    http.open("POST", "http://ccg.nsupdate.info:9000/add", true);
+                    http.open("GET", reqp, true);
                     http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                    var params = "add=1&key1=" + k1 + "&key2=" + k2 + "&val1=" + v1 + "&val2=" + v2 + "&mn=" + mn + "&c=" + v3;
-                    http.send(params);
+                    http.send();
                     addf(v1, v2, v3);
-                }*/
-                var params = "add=1&key1=" + k1 + "&key2=" + k2 + "&val1=" + v1 + "&val2=" + v2 + "&mn=" + mn + "&c=" + v3;
-                doCORSRequest({
-                    method: 'POST', // 'POST' : 'GET'
-                    url: "http://ccg.nsupdate.info:9000/add",
-                    data: params
-                }, function printResult(result) {
-                    addf(v1, v2, v3);
-                });
-            }
+                }
+		}
 		
-		var nope=null;
         </script>
-        <script type="text/javascript" src="https://cors.io/?http://ccg.nsupdate.info:9000/scoreboard.js"></script>
+        <script type="text/javascript" src="https://ccg.nsupdate.info/scoreboard.js"></script>
     </body>
 </html>
