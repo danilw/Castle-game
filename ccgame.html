@@ -301,12 +301,14 @@
             function looseJsonParse(obj){
 				return Function('"use strict";return (' + obj + ')')();
 			}
-			
+			function c_looseJsonParse(obj){
+				return Function('"use strict";return (typeof ' + obj + ' === \'undefined\')')();
+			}
             function loadscoreboardxyzw0(){
 				if(!isonline()){
 				if(!issloaded){
 					for(var i=0;i<10000;i++){
-						if(looseJsonParse("scoreboardxyzw"+i) === 'undefined'){
+						if(c_looseJsonParse("scoreboardxyzw"+i)){
 							return;
 						}
 						scoreboardx[i]=looseJsonParse("scoreboardxyzw"+i)[0];
